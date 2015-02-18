@@ -26,7 +26,7 @@ void Tool::applyMask( int x, int y, PixelBuffer &buffer, ColorData color ) {
 Tool::Tool() {
 	m_maskWidth = 0;
 	m_maskHeight = 0;
-	m_mask = new float[0];
+	m_mask = new float[0]; //Seems unnecessary, but at least we know the mask is initialized
 }
 
 /**

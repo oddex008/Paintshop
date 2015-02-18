@@ -103,6 +103,7 @@ void PaintShop::initGlui()
 	new GLUI_RadioButton(radio, "Spray Can");
 	new GLUI_RadioButton(radio, "Calligraphy Pen");
 	new GLUI_RadioButton(radio, "Highlighter");
+	new GLUI_RadioButton(radio, "Fill");
 	
 	GLUI_Panel *colPanel = new GLUI_Panel(m_glui, "Tool Color");
 	
