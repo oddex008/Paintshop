@@ -1,12 +1,12 @@
 /*
- * BaseTool.cpp
+ * Tool.cpp
  *
  *  Created on: Feb 18, 2015
  *      Author: christopher
  */
 
 #include <math.h>
-#include "BaseTool.h"
+#include "Tool.h"
 
 /**
  * Applies this tools mask to the provided pixel buffer, updating pixels with the
@@ -16,7 +16,7 @@
  * 		  buffer The pixelbuffer to apply this tool to, passed by reference
  * 		  color The colordata to utilize in applying this tool
  */
-void BaseTool::applyMask( int x, int y, PixelBuffer &buffer, ColorData color ) {
+void Tool::applyMask( int x, int y, PixelBuffer &buffer, ColorData color ) {
 
 }
 
@@ -26,7 +26,7 @@ void BaseTool::applyMask( int x, int y, PixelBuffer &buffer, ColorData color ) {
  * @param radius The radius of the mask, in pixels
  * 		  fallOff The mask value of the outermost mask pixels
  */
-BaseTool::BaseTool( int radius, float fallOff ) {
+Tool::Tool( int radius, float fallOff ) {
 	// TODO Auto-generated constructor stub
 
 }
@@ -37,7 +37,7 @@ BaseTool::BaseTool( int radius, float fallOff ) {
  * 		  height The y dimension of the mask
  * 		  opacity The uniform mask value
  */
-BaseTool::BaseTool( int width, int height, float opacity ) {
+Tool::Tool( int width, int height, float opacity ) {
 	// TODO Auto-generated constructor stub
 
 }
@@ -45,6 +45,6 @@ BaseTool::BaseTool( int width, int height, float opacity ) {
 /**
  * Releases any resources used by this tool.
  */
-BaseTool::~BaseTool() {
+Tool::~Tool() {
 	delete[] m_mask; //Free the mask array
 }
