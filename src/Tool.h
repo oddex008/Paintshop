@@ -19,6 +19,7 @@ public:
 
 	virtual void applyMask( int x, int y, PixelBuffer &buffer, ColorData color );
 
+	Tool();
 	Tool( int radius, float fallOff = 1.0f );
 	Tool( int width, int height, float opacity = 1.0f );
 	virtual ~Tool();

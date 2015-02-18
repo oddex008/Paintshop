@@ -10,6 +10,13 @@
 #include "ColorData.h"
 #include "PixelBuffer.h"
 
+#include "ToolCalligraphyPen.h"
+#include "ToolEraser.h"
+#include "ToolFill.h"
+#include "ToolHighlighter.h"
+#include "ToolPen.h"
+#include "ToolSprayCan.h"
+
 #include <cmath>
 
 using std::cout;
@@ -24,6 +31,16 @@ PaintShop::PaintShop(int argc, char* argv[], int width, int height, ColorData ba
 	// Initialize Interface
 	initializeBuffers(backgroundColor, width, height);
 	
+	// Initialize the tools array
+	//TODO: Make initializer list with Tool types?
+	m_tools = new Tool*[6];
+	m_tools[0] = new ToolPen();
+	m_tools[1] = new ToolEraser();
+	m_tools[2] = new ToolSprayCan();
+	m_tools[3] = new ToolCalligraphyPen();
+	m_tools[4] = new ToolHighlighter();
+	m_tools[5] = new ToolFill();
+
 	
 	initGlui();
 	initGraphics();
@@ -84,7 +101,7 @@ void PaintShop::initGlui()
 	new GLUI_RadioButton(radio, "Pen");
 	new GLUI_RadioButton(radio, "Eraser");
 	new GLUI_RadioButton(radio, "Spray Can");
-	new GLUI_RadioButton(radio, "Caligraphy Pen");
+	new GLUI_RadioButton(radio, "Calligraphy Pen");
 	new GLUI_RadioButton(radio, "Highlighter");
 	
 	GLUI_Panel *colPanel = new GLUI_Panel(m_glui, "Tool Color");

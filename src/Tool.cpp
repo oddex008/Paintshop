@@ -21,6 +21,15 @@ void Tool::applyMask( int x, int y, PixelBuffer &buffer, ColorData color ) {
 }
 
 /**
+ * Initializes a tool with an empty mask.
+ */
+Tool::Tool() {
+	m_maskWidth = 0;
+	m_maskHeight = 0;
+	m_mask = new float[0];
+}
+
+/**
  * Initializes a tool with a circular mask with the given radius, with linear
  * falloff to the provided mask value.
  * @param radius The radius of the mask, in pixels

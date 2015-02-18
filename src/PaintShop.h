@@ -11,10 +11,10 @@
 #define PAINTSHOP_H
 
 #include "BaseGfxApp.h"
+#include "Tool.h"
 
 class ColorData;
 class PixelBuffer;
-class Tool;
 
 class PaintShop : public BaseGfxApp 
 {
@@ -67,6 +67,9 @@ private:
 	// These are used to store the selections from the GLUI user interface
 	int m_curTool;
 	float m_curColorRed, m_curColorGreen, m_curColorBlue;
+
+	// Stores all of the tools, to be indexed by m_curTool
+	Tool **m_tools;
 };
 
 #endif
