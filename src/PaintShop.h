@@ -11,7 +11,7 @@
 #define PAINTSHOP_H
 
 #include "BaseGfxApp.h"
-#include "Tool.h"
+#include "tools/Tool.h"
 
 class ColorData;
 class PixelBuffer;

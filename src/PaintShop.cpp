@@ -10,12 +10,12 @@
 #include "ColorData.h"
 #include "PixelBuffer.h"
 
-#include "ToolCalligraphyPen.h"
-#include "ToolEraser.h"
-#include "ToolFill.h"
-#include "ToolHighlighter.h"
-#include "ToolPen.h"
-#include "ToolSprayCan.h"
+#include "tools/ToolCalligraphyPen.h"
+#include "tools/ToolEraser.h"
+#include "tools/ToolFill.h"
+#include "tools/ToolHighlighter.h"
+#include "tools/ToolPen.h"
+#include "tools/ToolSprayCan.h"
 
 #include <cmath>
 

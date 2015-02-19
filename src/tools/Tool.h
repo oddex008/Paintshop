@@ -8,8 +8,8 @@
 #ifndef TOOL_H_
 #define TOOL_H_
 
-#include "PixelBuffer.h"
-#include "ColorData.h"
+#include "../PixelBuffer.h"
+#include "../ColorData.h"
 
 class Tool {
 public:
