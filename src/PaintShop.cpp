@@ -10,6 +10,7 @@
 #include "ColorData.h"
 #include "PixelBuffer.h"
 
+#include "tools/Tool.h"
 #include "tools/ToolCalligraphyPen.h"
 #include "tools/ToolEraser.h"
 #include "tools/ToolFill.h"

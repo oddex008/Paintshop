@@ -11,10 +11,10 @@
 #define PAINTSHOP_H
 
 #include "BaseGfxApp.h"
-#include "tools/Tool.h"
 
 class ColorData;
 class PixelBuffer;
+class Tool;
 
 class PaintShop : public BaseGfxApp 
 {
