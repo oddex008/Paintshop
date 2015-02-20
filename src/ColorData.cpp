@@ -42,6 +42,14 @@ void ColorData::setAlpha(float a)
 	m_alpha = a;
 }
 
+void ColorData::setColor( float r, float g, float b, float a )
+{
+	m_red = r;
+	m_green = g;
+	m_blue = b;
+	m_alpha = a;
+}
+
 
 float ColorData::getRed() const
 {

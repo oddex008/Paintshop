@@ -8,7 +8,9 @@
 #ifndef COLORDATA_H
 #define COLORDATA_H
 
-class ColorData 
+#include "PaintShop.h"
+
+class ColorData
 {
 public:
 	// Specify the type of each color channel as a float
@@ -24,6 +26,7 @@ public:
 	void setBlue(float b);
 	void setGreen(float g);
 	void setAlpha(float a);
+	void setColor( float r, float g, float b, float alpha = 0.0f );
 	
 	// Float Getters
 	float getRed() const;
@@ -38,7 +41,7 @@ public:
 	friend ColorData operator* (const ColorData& a, float f);
 	friend ColorData operator+ (const ColorData& a, const ColorData& b);
 	friend ColorData operator- (const ColorData& a, const ColorData& b);
-	
+
 private:
 	// General helper function for clamping values between 0 and 1
 	static inline float clampValue(float input, float a, float b)
@@ -49,7 +52,8 @@ private:
 	component m_green;
 	component m_blue;
 	component m_alpha;
-	
+
+	friend class PaintShop;
 };
 
 #endif

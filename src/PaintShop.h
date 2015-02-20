@@ -63,10 +63,10 @@ private:
 	
 	// This is the pointer to the buffer where the display PixelBuffer is stored
 	PixelBuffer* m_displayBuffer;
+	ColorData* m_color;
 	
 	// These are used to store the selections from the GLUI user interface
 	int m_curTool;
-	float m_curColorRed, m_curColorGreen, m_curColorBlue;
 
 	// Stores all of the tools, to be indexed by m_curTool
 	Tool **m_tools;
