@@ -36,24 +36,20 @@ Tool::Tool() {
  * 		  fallOff The mask value of the outermost mask pixels
  */
 Tool::Tool( int radius, float fallOff ) {
-	int diameter = 2 * radius;
-	m_maskWidth = diameter;
-	m_maskHeight = diameter;
+    int diameter = 2 * radius;
+    m_maskWidth = diameter;
+    m_maskHeight = diameter;
 
-	float origin = diameter/2;
+    m_mask = new float[m_maskWidth * m_maskHeight];
 
-	m_mask = new float[m_maskWidth * m_maskHeight];
-
-	//Iterate over all pixels in the mask, in row major fashion
-	for( int y = 0; y < m_maskHeight; y++ ) {
-		for( int x = 0; x < m_maskWidth; x++ ) {
-			float distance = sqrt( pow( x - origin , 2 ) + pow( y - origin, 2) );
-			float opacity = fallOff * ( 1.0f - distance / radius );
-			m_mask[ y * m_maskWidth + x ] = opacity;
-		}
-	}
-
-
+    //Iterate over all pixels in the mask, in row major fashion
+    for( int y = 0; y < m_maskHeight; y++ ) {
+            for( int x = 0; x < m_maskWidth; x++ ) {
+                    float distance = sqrt( pow( radius - x, 2 ) + pow( radius - y, 2) );
+                    float opacity = distance > radius ? 0.0f : 1.0f - ( ( 1.0f - fallOff ) * distance ) / radius;
+                    m_mask[ y * m_maskWidth + x ] = opacity;
+            }
+    }
 }
 
 /**
@@ -63,8 +59,16 @@ Tool::Tool( int radius, float fallOff ) {
  * 		  opacity The uniform mask value
  */
 Tool::Tool( int width, int height, float opacity ) {
-	// TODO Auto-generated constructor stub
+    m_maskWidth = width;
+    m_maskHeight = height;
 
+    m_mask = new float[m_maskWidth * m_maskHeight];
+
+    for( int y = 0; y < m_maskHeight; y++ ) {
+            for( int x = 0; x < m_maskWidth; x++ ) {
+                    m_mask[ y * m_maskWidth + x ] = opacity;
+            }
+    }
 }
 
 /**
