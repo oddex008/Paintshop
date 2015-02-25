@@ -4,7 +4,7 @@
 
 UNAME = $(shell uname)
 CC 		= g++
-CFLAGS 	= -c -Wall
+CFLAGS 	= -c -Wall -O3
 LDFLAGS =
 GLUI = glui
 GLUI_PATH = ./glui

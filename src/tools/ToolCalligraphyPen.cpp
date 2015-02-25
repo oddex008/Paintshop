@@ -10,5 +10,5 @@
 /**
  * Initializes a pen with a rectangular, fully opaque mask.
  */
-ToolCalligraphyPen::ToolCalligraphyPen() : Tool( 16, 32, 1.0f ) {}
+ToolCalligraphyPen::ToolCalligraphyPen() : Tool( 8, 32, 1.0f ) {}
 
