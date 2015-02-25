@@ -75,12 +75,8 @@ Tool::Tool( int width, int height, float opacity ) {
 	for( int y = 0; y < m_maskHeight; y++ ) {
 		for( int x = 0; x < m_maskWidth; x++ ) {
 			m_mask[ y * m_maskWidth + x ] = opacity;
-			std::cout << opacity << " ";
 		}
-		std::cout << std::endl;
 	}
-	std::cout << std::endl;
-	std::cout << std::endl;
 }
 
 /**

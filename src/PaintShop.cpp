@@ -41,7 +41,6 @@ PaintShop::PaintShop(int argc, char* argv[], int width, int height, ColorData ba
 	m_tools[3] = new ToolCalligraphyPen();
 	m_tools[4] = new ToolHighlighter();
 	m_tools[5] = new ToolFill();
-
 	
 	initGlui();
 	initGraphics();
@@ -79,12 +78,11 @@ void PaintShop::mouseMoved(int x, int y)
 void PaintShop::leftMouseDown(int x, int y)
 {
 	m_tools[m_curTool]->applyMask( x, y, *m_displayBuffer, ColorData( m_colorRed, m_colorGreen, m_colorBlue ) );
-	std::cout << "mousePressed " << x << " " << y << std::endl;
 }
 
 void PaintShop::leftMouseUp(int x, int y)
 {
-	std::cout << "mouseReleased " << x << " " << y << std::endl;
+
 }
 
 void PaintShop::initializeBuffers(ColorData backgroundColor, int width, int height) {
