@@ -34,7 +34,7 @@ PaintShop::PaintShop(int argc, char* argv[], int width, int height, ColorData ba
 	
 	// Initialize the tools array
 	//TODO: Make initializer list with Tool types?
-	m_tools = new Tool*[2];
+	m_tools = new Tool*[6];
 	m_tools[0] = new ToolPen();
 	m_tools[1] = new ToolEraser();
 	m_tools[2] = new ToolSprayCan();
