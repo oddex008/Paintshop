@@ -129,7 +129,6 @@ void PaintShop::initGlui()
 	new GLUI_Button(colPanel, "White", UI_PRESET_WHITE, s_gluicallback);
 	new GLUI_Button(colPanel, "Black", UI_PRESET_BLACK, s_gluicallback);
 	
-	
 	new GLUI_Button(m_glui, "Quit", UI_QUIT, (GLUI_Update_CB)exit);
 }
 

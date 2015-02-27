@@ -22,7 +22,7 @@ void Tool::applyMask( int x, int y, PixelBuffer &buffer, ColorData color ) {
 
 	for( int row = 0; row < m_maskHeight; row++ ) {
 		for( int col = 0; col < m_maskWidth; col++ ) {
-			float opacity = m_mask[row * m_maskWidth + col];
+			float opacity = getOpacity( col, row );
 			buffer.setPixel( col + originX, row + originY, ( color * opacity ) + ( buffer.getPixel( col + originX, row + originY ) * ( 1.0f - opacity ) ) );
 		}
 	}

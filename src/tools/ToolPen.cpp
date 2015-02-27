@@ -10,6 +10,6 @@
 /**
  * Initializes a pen with radius 16px, and no fall-off
  */
-ToolPen::ToolPen() : Tool( 16, 1.0f ) {
+ToolPen::ToolPen() : Tool( 8, 1.0f ) {
 
 }
