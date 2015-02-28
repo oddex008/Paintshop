@@ -1,8 +1,8 @@
 /*
  * ToolFill.h
  *
- *  Created on: Feb 18, 2015
- *      Author: christopher
+ *  Created on: Feb 28, 2015
+ *      Author: Tom Odde
  */
 
 #ifndef TOOLFILL_H_
