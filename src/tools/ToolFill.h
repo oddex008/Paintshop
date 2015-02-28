@@ -16,6 +16,7 @@ public:
 	void applyMask( int x, int y, PixelBuffer &buffer, ColorData color );
 	void applyFill( int x, int y, ColorData originColor, ColorData fillColor, PixelBuffer &buffer, int xMax, int yMax);
 	bool colorCompare(ColorData a, ColorData b);
+	bool checkRecurse(int x, int y, ColorData fillColor, PixelBuffer &buffer);
 	ToolFill();
 };
 
