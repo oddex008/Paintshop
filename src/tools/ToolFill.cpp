@@ -31,6 +31,8 @@ void ToolFill::applyMask( int x, int y, PixelBuffer &buffer, ColorData color ) {
 	int yMax = m_maskHeight;
 	int xMax = m_maskWidth;
 	applyFill(x, y, originColor, color, buffer, xMax, yMax);
+
+
 	bool workDone = 1;
 
 	while(workDone)
@@ -49,6 +51,7 @@ void ToolFill::applyMask( int x, int y, PixelBuffer &buffer, ColorData color ) {
 		}
 	}
 
+
 	for(int i = 0; i < m_maskHeight * m_maskWidth ; i++ )
 	{
 		m_loc[i] = 0;
@@ -59,12 +62,28 @@ void ToolFill::applyFill( int x, int y, ColorData originColor, ColorData fillCol
 	cerr << "Iterative Call applyFill: " << x << " " << y << endl;
 	buffer.setPixel(x, y, fillColor);
 
+	int ur_y = canvasTraverseY(x, y + 1, 1, 1, xMax, yMax, originColor, fillColor, buffer);
+	int ur_x = canvasTraverseX(x, y + 1, 1, 1, xMax, yMax, originColor, fillColor, buffer);
+
+	int lr_y = canvasTraverseY(x + 1, y, 1, -1, xMax, -1, originColor, fillColor, buffer);
+	int lr_x = canvasTraverseX(x + 1, y, 1, -1, xMax, -1, originColor, fillColor, buffer);
+
+	int ll_y = canvasTraverseY(x, y - 1, -1, -1, -1, -1, originColor, fillColor, buffer);
+	int ll_x = canvasTraverseX(x, y - 1, -1, -1, -1, -1, originColor, fillColor, buffer);
+
+	int ul_y = canvasTraverseY(x - 1, y, -1, 1, -1, yMax, originColor, fillColor, buffer);
+	int ul_x = canvasTraverseX(x - 1, y, -1, 1, -1, yMax, originColor, fillColor, buffer);
+
+
 	/*
 	 * Upper Right Quadrant
 	 * k(y)++, j(x)++
 	 */
-	int k = y + 1;
-	int j = x;
+
+
+	//int k = y + 1;
+	//int j = x;
+	/*
 	while(k < yMax)
 	{
 		while(j < xMax)
@@ -140,12 +159,15 @@ void ToolFill::applyFill( int x, int y, ColorData originColor, ColorData fillCol
 	}
 
 	int ur_x = j;
+*/
+
 
 	/*
 	 * Lower Right Quadrant
 	 * k(y)--, j(x)++
 	 */
 
+	/*
 	k = y;
 	j = x + 1;
 	while(k >= 0)
@@ -224,12 +246,12 @@ void ToolFill::applyFill( int x, int y, ColorData originColor, ColorData fillCol
 
 	int lr_x = j;
 
-
+*/
 	/*
 	 * Lower Left Quadrant
 	 * k(y)--, j(x)--
 	 */
-
+/*
 	k = y - 1;
 	j = x;
 	while(k >= 0)
@@ -307,13 +329,13 @@ void ToolFill::applyFill( int x, int y, ColorData originColor, ColorData fillCol
 
 	int ll_x = j;
 
-
+*/
 
 	/*
 	 * Upper Left Quadrant
 	 * k(y)++, j(x)--
 	 */
-
+/*
 	k = y;
 	j = x - 1;
 	while(k < yMax)
@@ -391,6 +413,8 @@ void ToolFill::applyFill( int x, int y, ColorData originColor, ColorData fillCol
 	}
 
 	int ul_x = j;
+*/
+
 
 	/*
 	 * Recursive calls if pockets were missed by the loops above.
@@ -401,6 +425,7 @@ void ToolFill::applyFill( int x, int y, ColorData originColor, ColorData fillCol
 	 *
 	 */
 
+	/*
 	if(checkRecurse(ur_x, ur_y, fillColor, buffer) & colorCompare(originColor, buffer.getPixel(ur_x, ur_y)))
 	{
 		cerr << "Recursive Call applyFill ur: " << ur_x << " " << ur_y << endl;
@@ -422,53 +447,7 @@ void ToolFill::applyFill( int x, int y, ColorData originColor, ColorData fillCol
 		applyFill(ul_x, ul_y, originColor, fillColor, buffer, xMax, yMax);
 	}
 
-/*
-	if((ur_x < xMax) & (ur_y < yMax))
-	{
-		if(colorCompare(originColor, buffer.getPixel(ur_x, ur_y)))
-		{
-			cerr << "Recursive Call applyFill: " << ur_x << " " << ur_y << endl;
-			applyFill(ur_x, ur_y, originColor, fillColor, buffer, xMax, yMax);
-		}
-	}
 */
-/*
-	cerr << "Recursive Call applyFill: " << x << " " << y << endl;
-	if(x > 1 && x < xMax && y > 1 && y < yMax)
-	{
-		ColorData up = buffer.getPixel(x, y + 1);
-		ColorData left = buffer.getPixel(x - 1, y);
-		ColorData down = buffer.getPixel(x, y - 1);
-		ColorData right = buffer.getPixel(x + 1, y);
-
-		if(colorCompare(originColor, up) & ~m_loc[(y + 1) * m_maskWidth + x]){
-			m_loc[(y + 1) * m_maskWidth + x] = 1;
-			// m_mask[(y + 1) * m_maskWidth + x] = 1.0f;
-			buffer.setPixel(x, y + 1, fillColor);
-			applyFill(x, y + 1, originColor, fillColor, buffer, xMax, yMax);
-		}
-		if(colorCompare(originColor, left) & ~m_loc[y * m_maskWidth + (x - 1)]){
-			m_loc[y * m_maskWidth + (x - 1)] = 1;
-			// m_mask[y * m_maskWidth + (x - 1)] = 1.0f;
-			buffer.setPixel(x - 1, y, fillColor);
-			applyFill(x - 1, y, originColor, fillColor, buffer, xMax, yMax);
-		}
-
-		if(colorCompare(originColor, down) & ~m_loc[(y - 1) * m_maskWidth + x]){
-			m_loc[(y - 1) * m_maskWidth + x] = 1;
-			// m_mask[(y - 1) * m_maskWidth + x] = 1.0f;
-			buffer.setPixel(x, y - 1, fillColor);
-			applyFill(x, y - 1, originColor, fillColor, buffer, xMax, yMax);
-		}
-		if(colorCompare(originColor, right) & ~m_loc[y * m_maskWidth + (x + 1)]){
-			m_loc[y * m_maskWidth + (x + 1)] = 1;
-			// m_mask[y * m_maskWidth + (x + 1)] = 1.0f;
-			buffer.setPixel(x + 1, y, fillColor);
-			applyFill(x + 1, y, originColor, fillColor, buffer, xMax, yMax);
-		}
-
-	}
-	*/
 }
 
 bool ToolFill::colorCompare(ColorData a, ColorData b)
@@ -481,6 +460,10 @@ bool ToolFill::checkRecurse(int x, int y, ColorData fillColor, PixelBuffer &buff
 	int xMax = buffer.getWidth() - 1;
 	int yMax = buffer.getHeight() - 1;
 
+	if(colorCompare(fillColor, buffer.getPixel(x, y)))
+	{
+		return 0;
+	}
 
 	if(x >= 1 && x < xMax && y >= 1 && y < yMax)
 	{
@@ -513,6 +496,89 @@ bool ToolFill::checkRecurse(int x, int y, ColorData fillColor, PixelBuffer &buff
 	{
 		return 0;
 	}
+}
+
+int ToolFill::canvasTraverseY(int x, int y, int xmove, int ymove, int xlim, int ylim, ColorData originColor, ColorData fillColor, PixelBuffer &buffer)
+{
+
+	int k = y;
+	int j = x;
+	while(k != ylim)
+	{
+		while(j != xlim)
+		{
+			if((colorCompare(originColor, buffer.getPixel(j, k)) || colorCompare(fillColor, buffer.getPixel(j, k)))  & ~m_loc[k * m_maskWidth + j])
+			{
+				m_loc[k * m_maskWidth + j] = 1;
+				buffer.setPixel(j, k, fillColor);
+				j += xmove;
+			}
+			else
+			{
+				m_loc[k * m_maskWidth + j] = 1;
+				break;
+			}
+		}
+		j = x;
+		k += ymove;
+
+		if(k != ylim)
+		{
+			if(colorCompare(originColor, buffer.getPixel(j, k)) | colorCompare(fillColor, buffer.getPixel(j, k)))
+			{
+			}
+			else
+			{
+				break;
+			}
+		}
+	}
+	return k;
+}
+
+int ToolFill::canvasTraverseX(int x, int y, int xmove, int ymove, int xlim, int ylim, ColorData originColor, ColorData fillColor, PixelBuffer &buffer)
+{
+
+	int k = y;
+	int j = x;
+	while(j != xlim)
+	{
+		while(k != ylim)
+		{
+			if((colorCompare(originColor, buffer.getPixel(j, k)) || colorCompare(fillColor, buffer.getPixel(j, k))))
+			{
+				if(m_loc[k * m_maskWidth + j])
+				{
+					k += ymove;
+				}
+				else
+				{
+					m_loc[k * m_maskWidth + j] = 1;
+					buffer.setPixel(j, k, fillColor);
+					k += ymove;
+				}
+			}
+			else
+			{
+				m_loc[k * m_maskWidth + j] = 1;
+				break;
+			}
+		}
+		k = y;
+		j += xmove;
+
+		if(j != xlim)
+		{
+			if(colorCompare(originColor, buffer.getPixel(j, k)) | colorCompare(fillColor, buffer.getPixel(j, k)))
+			{
+			}
+			else
+			{
+				break;
+			}
+		}
+	}
+	return j;
 }
 
 ToolFill::ToolFill() : Tool(800, 800, 0.0f){
