@@ -31,6 +31,11 @@ else # LINUX
 	EXECUTABLE = paintshop
 endif
 
+# Include nvidia drivers if necessary:
+NVIDIA_LIB = $(wildcard /usr/lib/nvidia-304)
+ifneq ($(NVIDIA_LIB),)
+	LINK_LIBS += -L$(NVIDIA_LIB)
+endif
 
 build: setup $(EXECUTABLE)
 
