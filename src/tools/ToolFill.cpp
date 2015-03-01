@@ -8,8 +8,6 @@
 #include "ToolFill.h"
 
 
-using std::cerr;
-using std::endl;
 /**
  * Changes the selected pixels and all neighboring pixels that are the
  * same color to the selected color.
@@ -22,7 +20,6 @@ using std::endl;
 
 
 void ToolFill::applyMask( int x, int y, PixelBuffer &buffer, ColorData color ) {
-	cerr << "Call applyMask: " << x << " " << y << endl;
 	y = buffer.getHeight() - y;
 	ColorData originColor = buffer.getPixel(x, y);
 	int yMax = buffer.getHeight();
@@ -54,54 +51,20 @@ void ToolFill::applyMask( int x, int y, PixelBuffer &buffer, ColorData color ) {
 }
 
 void ToolFill::applyFill( int x, int y, ColorData originColor, ColorData fillColor, PixelBuffer &buffer, int xMax, int yMax) {
-	cerr << "Iterative Call applyFill: " << x << " " << y << endl;
 	buffer.setPixel(x, y, fillColor);
 
-	int ur_y = canvasTraverseY(x, y + 1, 1, 1, xMax, yMax, originColor, fillColor, buffer);
-	int ur_x = canvasTraverseX(x, y + 1, 1, 1, xMax, yMax, originColor, fillColor, buffer);
+	canvasTraverseY(x, y + 1, 1, 1, xMax, yMax, originColor, fillColor, buffer);
+	canvasTraverseX(x, y + 1, 1, 1, xMax, yMax, originColor, fillColor, buffer);
 
-	int lr_y = canvasTraverseY(x + 1, y, 1, -1, xMax, -1, originColor, fillColor, buffer);
-	int lr_x = canvasTraverseX(x + 1, y, 1, -1, xMax, -1, originColor, fillColor, buffer);
+	canvasTraverseY(x + 1, y, 1, -1, xMax, -1, originColor, fillColor, buffer);
+	canvasTraverseX(x + 1, y, 1, -1, xMax, -1, originColor, fillColor, buffer);
 
-	int ll_y = canvasTraverseY(x, y - 1, -1, -1, -1, -1, originColor, fillColor, buffer);
-	int ll_x = canvasTraverseX(x, y - 1, -1, -1, -1, -1, originColor, fillColor, buffer);
+	canvasTraverseY(x, y - 1, -1, -1, -1, -1, originColor, fillColor, buffer);
+	canvasTraverseX(x, y - 1, -1, -1, -1, -1, originColor, fillColor, buffer);
 
-	int ul_y = canvasTraverseY(x - 1, y, -1, 1, -1, yMax, originColor, fillColor, buffer);
-	int ul_x = canvasTraverseX(x - 1, y, -1, 1, -1, yMax, originColor, fillColor, buffer);
+	canvasTraverseY(x - 1, y, -1, 1, -1, yMax, originColor, fillColor, buffer);
+	canvasTraverseX(x - 1, y, -1, 1, -1, yMax, originColor, fillColor, buffer);
 
-
-	/*
-	 * Recursive calls if pockets were missed by the loops above.
-	 *
-	 * To get a call
-	 * Same color as origin was:
-	 * In bounds.
-	 *
-	 */
-
-	/*
-	if(checkRecurse(ur_x, ur_y, fillColor, buffer) & colorCompare(originColor, buffer.getPixel(ur_x, ur_y)))
-	{
-		cerr << "Recursive Call applyFill ur: " << ur_x << " " << ur_y << endl;
-		applyFill(ur_x, ur_y, originColor, fillColor, buffer, xMax, yMax);
-	}
-	if(checkRecurse(lr_x, lr_y, fillColor, buffer) & colorCompare(originColor, buffer.getPixel(lr_x, lr_y)))
-	{
-		cerr << "Recursive Call applyFill lr: " << lr_x << " " << lr_y << endl;
-		applyFill(lr_x, lr_y, originColor, fillColor, buffer, xMax, yMax);
-	}
-	if(checkRecurse(ll_x, ll_y, fillColor, buffer) & colorCompare(originColor, buffer.getPixel(ll_x, ll_y)))
-	{
-		cerr << "Recursive Call applyFill ll: " << ll_x << " " << ll_y << endl;
-		applyFill(ll_x, ll_y, originColor, fillColor, buffer, xMax, yMax);
-	}
-	if(checkRecurse(ul_x, ul_y, fillColor, buffer) & colorCompare(originColor, buffer.getPixel(ul_x, ul_y)))
-	{
-		cerr << "Recursive Call applyFill ul: " << ul_x << " " << ul_y << endl;
-		applyFill(ul_x, ul_y, originColor, fillColor, buffer, xMax, yMax);
-	}
-
-*/
 }
 
 bool ToolFill::colorCompare(ColorData a, ColorData b)
@@ -152,7 +115,7 @@ bool ToolFill::checkRecurse(int x, int y, ColorData fillColor, PixelBuffer &buff
 	}
 }
 
-int ToolFill::canvasTraverseY(int x, int y, int xmove, int ymove, int xlim, int ylim, ColorData originColor, ColorData fillColor, PixelBuffer &buffer)
+void ToolFill::canvasTraverseY(int x, int y, int xmove, int ymove, int xlim, int ylim, ColorData originColor, ColorData fillColor, PixelBuffer &buffer)
 {
 
 	int k = y;
@@ -188,10 +151,9 @@ int ToolFill::canvasTraverseY(int x, int y, int xmove, int ymove, int xlim, int 
 			}
 		}
 	}
-	return k;
 }
 
-int ToolFill::canvasTraverseX(int x, int y, int xmove, int ymove, int xlim, int ylim, ColorData originColor, ColorData fillColor, PixelBuffer &buffer)
+void ToolFill::canvasTraverseX(int x, int y, int xmove, int ymove, int xlim, int ylim, ColorData originColor, ColorData fillColor, PixelBuffer &buffer)
 {
 
 	int k = y;
@@ -234,11 +196,11 @@ int ToolFill::canvasTraverseX(int x, int y, int xmove, int ymove, int xlim, int 
 			}
 		}
 	}
-	return j;
 }
 
-ToolFill::ToolFill() : Tool(800, 800, 0.0f){
-	int len = m_maskWidth * m_maskHeight;
+ToolFill::ToolFill() : Tool(){
+	int dim = 800;
+	int len = dim * dim;
 	m_loc = new int[len];
 	for(int i = 0; i < len ; i++ )
 	{
