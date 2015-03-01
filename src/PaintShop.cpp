@@ -66,7 +66,7 @@ PaintShop::~PaintShop()
 
 void PaintShop::mouseDragged(int x, int y)
 {
-	m_tools[m_curTool]->applyMask( x, y, *m_displayBuffer, ColorData( m_colorRed, m_colorGreen, m_colorBlue ) );
+	m_tools[m_curTool]->applyTool( x, y, *m_displayBuffer, ColorData( m_colorRed, m_colorGreen, m_colorBlue ) );
 }
 
 void PaintShop::mouseMoved(int x, int y)
@@ -77,7 +77,7 @@ void PaintShop::mouseMoved(int x, int y)
 
 void PaintShop::leftMouseDown(int x, int y)
 {
-	m_tools[m_curTool]->applyMask( x, y, *m_displayBuffer, ColorData( m_colorRed, m_colorGreen, m_colorBlue ) );
+	m_tools[m_curTool]->applyTool( x, y, *m_displayBuffer, ColorData( m_colorRed, m_colorGreen, m_colorBlue ) );
 }
 
 void PaintShop::leftMouseUp(int x, int y)

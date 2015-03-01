@@ -12,7 +12,7 @@
 
 class ToolFill: public Tool {
 public:
-	void applyMask( int x, int y, PixelBuffer &buffer, ColorData color );
+	void applyTool( int x, int y, PixelBuffer &buffer, ColorData color );
 	ToolFill();
 private:
 	void applyFill( int x, int y, ColorData originColor, ColorData fillColor, PixelBuffer &buffer, int xMax, int yMax);

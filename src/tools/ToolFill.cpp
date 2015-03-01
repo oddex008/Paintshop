@@ -19,7 +19,7 @@
 
 
 
-void ToolFill::applyMask( int x, int y, PixelBuffer &buffer, ColorData color ) {
+void ToolFill::applyTool( int x, int y, PixelBuffer &buffer, ColorData color ) {
 	y = buffer.getHeight() - y;
 	ColorData originColor = buffer.getPixel(x, y);
 	int yMax = buffer.getHeight();

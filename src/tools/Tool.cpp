@@ -16,7 +16,7 @@
  * 		  buffer The pixelbuffer to apply this tool to, passed by reference
  * 		  color The colordata to utilize in applying this tool
  */
-void Tool::applyMask( int x, int y, PixelBuffer &buffer, ColorData color ) {
+void Tool::applyTool( int x, int y, PixelBuffer &buffer, ColorData color ) {
 	int originX = x - ( m_maskWidth / 2 );
 	int originY = ( buffer.getHeight() - y ) - ( m_maskHeight / 2 );
 

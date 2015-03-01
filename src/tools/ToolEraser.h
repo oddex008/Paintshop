@@ -12,7 +12,7 @@
 
 class ToolEraser: public Tool {
 public:
-	void applyMask( int x, int y, PixelBuffer &buffer, ColorData color );
+	void applyTool( int x, int y, PixelBuffer &buffer, ColorData color );
 
 	ToolEraser();
 };

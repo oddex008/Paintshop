@@ -15,8 +15,8 @@
  * 		  buffer The pixelbuffer to erase from
  * 		  color The currently selected color
  */
-void ToolEraser::applyMask( int x, int y, PixelBuffer &buffer, ColorData color ) {
-	Tool::applyMask( x, y, buffer, buffer.getBackgroundColor() );
+void ToolEraser::applyTool( int x, int y, PixelBuffer &buffer, ColorData color ) {
+	Tool::applyTool( x, y, buffer, buffer.getBackgroundColor() );
 }
 
 /**
