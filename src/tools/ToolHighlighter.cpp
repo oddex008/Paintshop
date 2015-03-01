@@ -10,5 +10,5 @@
 /**
  * Initializes a 16x32px highlighter, with an opacity of 0.5.
  */
-ToolHighlighter::ToolHighlighter() : Tool( 8, 32, 0.5f) {}
+ToolHighlighter::ToolHighlighter() : Tool( 8, 32, 0.25f) {}
 
